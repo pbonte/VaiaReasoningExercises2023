@@ -1,0 +1,11 @@
+@prefix saref: <https://saref.etsi.org/core/> .
+@prefix sosa:  <http://www.w3.org/ns/sosa/> .
+
+
+
+{?x a sosa:Observation} => {?x a saref:Measurement}.
+
+{?x a sosa:FeatureOfInterest}	=>	{?x a saref:FeatureOfInterest}
+{?x sosa:hasFeatureOfInterest ?y}	=>	{?x saref:isMeasurementOf ?y}
+{?x sosa:observedProperty ?y}	=>	{?x saref:relatesToProperty ?y}
+{?x sosa:hasSimpleResult ?y}	=>	{?x saref:hasValue ?y}

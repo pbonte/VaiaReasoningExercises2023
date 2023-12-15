@@ -1,0 +1,92 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+
+{
+    ?x ?p ?y .
+} => {
+    ?p rdf:type rdf:Property .
+} .
+
+{
+    ?p rdfs:domain ?c .
+    ?x ?p ?y .
+} => {
+    ?x rdf:type ?c .
+} .
+
+{
+    ?p rdfs:range ?c .
+    ?x ?p ?y .
+} => {
+    ?y rdf:type ?c .
+} .
+
+{
+    ?x ?p ?y .
+} => {
+    ?x rdf:type rdfs:Resource .
+} .
+
+{
+    ?x ?p ?y .
+} => {
+    ?y rdf:type rdfs:Resource .
+} .
+
+{
+    ?p rdfs:subPropertyOf ?q .
+    ?q rdfs:subPropertyOf ?r .
+} => {
+    ?p rdfs:subPropertyOf ?r .
+} .
+
+{
+    ?p rdf:type rdf:Property .
+} => {
+    ?p rdfs:subPropertyOf ?p .
+} .
+
+{
+    ?p rdfs:subPropertyOf ?q .
+    ?x ?p ?y .
+} => {
+    ?x ?q ?y .
+} .
+
+{
+    ?c rdf:type rdfs:Class .
+} => {
+    ?c rdfs:subClassOf rdfs:Resource .
+} .
+
+{
+    ?c rdfs:subClassOf ?d .
+    ?x rdf:type ?c .
+} => {
+    ?x rdf:type ?d .
+} .
+
+{
+    ?c rdf:type rdfs:Class .
+} => {
+    ?c rdfs:subClassOf ?c .
+} .
+
+{
+    ?c rdfs:subClassOf ?d .
+    ?d rdfs:subClassOf ?e .
+} => {
+    ?c rdfs:subClassOf ?e .
+} .
+
+{
+    ?p rdf:type rdfs:ContainerMembershipProperty .
+} => {
+    ?p rdfs:subPropertyOf rdfs:member .
+} .
+
+{
+    ?x rdf:type rdfs:Datatype .
+} => {
+    ?x rdfs:subClassOf rdfs:Literal .
+} .

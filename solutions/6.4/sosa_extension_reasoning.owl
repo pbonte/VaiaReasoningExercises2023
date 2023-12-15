@@ -1,0 +1,299 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.vaia.course/reasoning/sosa_extension/"
+     xml:base="http://www.vaia.course/reasoning/sosa_extension/"
+     xmlns:schema="http://schema.org/"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:vann="http://purl.org/vocab/vann/"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:sosa="http://www.w3.org/ns/sosa/">
+    <owl:Ontology rdf:about="http://www.vaia.course/reasoning/sosa_extension/">
+        <owl:imports rdf:resource="http://www.w3.org/ns/sosa/"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.vaia.course/reasoning/sosa_extension/Dew -->
+
+    <owl:Class rdf:about="http://www.vaia.course/reasoning/sosa_extension/Dew">
+        <rdfs:subClassOf rdf:resource="http://www.vaia.course/reasoning/sosa_extension/Humidity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.vaia.course/reasoning/sosa_extension/DifferentialExpansion -->
+
+    <owl:Class rdf:about="http://www.vaia.course/reasoning/sosa_extension/DifferentialExpansion">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/sosa/observes"/>
+                <owl:someValuesFrom rdf:resource="http://www.vaia.course/reasoning/sosa_extension/Expansion"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/Sensor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.vaia.course/reasoning/sosa_extension/Expansion -->
+
+    <owl:Class rdf:about="http://www.vaia.course/reasoning/sosa_extension/Expansion">
+        <rdfs:subClassOf rdf:resource="http://www.vaia.course/reasoning/sosa_extension/Temperature"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.vaia.course/reasoning/sosa_extension/HighTemperatureObservation -->
+
+    <owl:Class rdf:about="http://www.vaia.course/reasoning/sosa_extension/HighTemperatureObservation">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.w3.org/ns/sosa/madeBySensor"/>
+                        <owl:someValuesFrom rdf:resource="http://www.vaia.course/reasoning/sosa_extension/TemperatureSensor"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.w3.org/ns/sosa/hasSimpleResult"/>
+                        <owl:someValuesFrom>
+                            <rdfs:Datatype>
+                                <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+                                <owl:withRestrictions rdf:parseType="Collection">
+                                    <rdf:Description>
+                                        <xsd:minExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#float">20.0</xsd:minExclusive>
+                                    </rdf:Description>
+                                </owl:withRestrictions>
+                            </rdfs:Datatype>
+                        </owl:someValuesFrom>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/Observation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.vaia.course/reasoning/sosa_extension/HighTemperatureSensor -->
+
+    <owl:Class rdf:about="http://www.vaia.course/reasoning/sosa_extension/HighTemperatureSensor">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/sosa/madeObservation"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.vaia.course/reasoning/sosa_extension/HighTemperatureObservation"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.vaia.course/reasoning/sosa_extension/TemperatureSensor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.vaia.course/reasoning/sosa_extension/HomeStation -->
+
+    <owl:Class rdf:about="http://www.vaia.course/reasoning/sosa_extension/HomeStation">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/sosa/observes"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.vaia.course/reasoning/sosa_extension/Dew"/>
+                            <rdf:Description rdf:about="http://www.vaia.course/reasoning/sosa_extension/Wetness"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.vaia.course/reasoning/sosa_extension/System"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.vaia.course/reasoning/sosa_extension/Humidity -->
+
+    <owl:Class rdf:about="http://www.vaia.course/reasoning/sosa_extension/Humidity">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.vaia.course/reasoning/sosa_extension/HumidityOnlySystem -->
+
+    <owl:Class rdf:about="http://www.vaia.course/reasoning/sosa_extension/HumidityOnlySystem">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/sosa/observes"/>
+                <owl:allValuesFrom rdf:resource="http://www.vaia.course/reasoning/sosa_extension/Humidity"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.vaia.course/reasoning/sosa_extension/System"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.vaia.course/reasoning/sosa_extension/HumiditySensor -->
+
+    <owl:Class rdf:about="http://www.vaia.course/reasoning/sosa_extension/HumiditySensor">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/sosa/observes"/>
+                <owl:someValuesFrom rdf:resource="http://www.vaia.course/reasoning/sosa_extension/Humidity"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/Sensor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.vaia.course/reasoning/sosa_extension/System -->
+
+    <owl:Class rdf:about="http://www.vaia.course/reasoning/sosa_extension/System"/>
+    
+
+
+    <!-- http://www.vaia.course/reasoning/sosa_extension/Temperature -->
+
+    <owl:Class rdf:about="http://www.vaia.course/reasoning/sosa_extension/Temperature">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.vaia.course/reasoning/sosa_extension/TemperatureOnlySystem -->
+
+    <owl:Class rdf:about="http://www.vaia.course/reasoning/sosa_extension/TemperatureOnlySystem">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/sosa/observes"/>
+                <owl:allValuesFrom rdf:resource="http://www.vaia.course/reasoning/sosa_extension/Temperature"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.vaia.course/reasoning/sosa_extension/System"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.vaia.course/reasoning/sosa_extension/TemperatureSensor -->
+
+    <owl:Class rdf:about="http://www.vaia.course/reasoning/sosa_extension/TemperatureSensor">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/sosa/observes"/>
+                <owl:someValuesFrom rdf:resource="http://www.vaia.course/reasoning/sosa_extension/Temperature"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/Sensor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.vaia.course/reasoning/sosa_extension/Tensio -->
+
+    <owl:Class rdf:about="http://www.vaia.course/reasoning/sosa_extension/Tensio">
+        <rdfs:subClassOf rdf:resource="http://www.vaia.course/reasoning/sosa_extension/Humidity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.vaia.course/reasoning/sosa_extension/WetBulb -->
+
+    <owl:Class rdf:about="http://www.vaia.course/reasoning/sosa_extension/WetBulb">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/sosa/observes"/>
+                <owl:someValuesFrom rdf:resource="http://www.vaia.course/reasoning/sosa_extension/Wetness"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/Sensor"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/sosa/observes"/>
+                <owl:allValuesFrom rdf:resource="http://www.vaia.course/reasoning/sosa_extension/Wetness"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.vaia.course/reasoning/sosa_extension/Wetness -->
+
+    <owl:Class rdf:about="http://www.vaia.course/reasoning/sosa_extension/Wetness">
+        <rdfs:subClassOf rdf:resource="http://www.vaia.course/reasoning/sosa_extension/Temperature"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/ns/sosa/Sensor -->
+
+    <rdf:Description rdf:about="http://www.w3.org/ns/sosa/Sensor">
+        <rdfs:subClassOf rdf:resource="http://www.vaia.course/reasoning/sosa_extension/System"/>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.vaia.course/reasoning/sosa_extension/obs -->
+
+    <owl:NamedIndividual rdf:about="http://www.vaia.course/reasoning/sosa_extension/obs">
+        <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Observation"/>
+        <sosa:madeBySensor rdf:resource="http://www.vaia.course/reasoning/sosa_extension/tempSensor"/>
+        <sosa:hasSimpleResult rdf:datatype="http://www.w3.org/2001/XMLSchema#float">30.0</sosa:hasSimpleResult>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.vaia.course/reasoning/sosa_extension/tempSensor -->
+
+    <owl:NamedIndividual rdf:about="http://www.vaia.course/reasoning/sosa_extension/tempSensor">
+        <rdf:type rdf:resource="http://www.w3.org/ns/sosa/Sensor"/>
+        <sosa:observes rdf:resource="http://www.vaia.course/reasoning/sosa_extension/wetness"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.vaia.course/reasoning/sosa_extension/tempSensor2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.vaia.course/reasoning/sosa_extension/tempSensor2">
+        <rdf:type rdf:resource="http://www.vaia.course/reasoning/sosa_extension/TemperatureSensor"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.vaia.course/reasoning/sosa_extension/wetness -->
+
+    <owl:NamedIndividual rdf:about="http://www.vaia.course/reasoning/sosa_extension/wetness">
+        <rdf:type rdf:resource="http://www.vaia.course/reasoning/sosa_extension/Wetness"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+

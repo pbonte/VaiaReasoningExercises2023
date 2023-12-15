@@ -1,0 +1,27 @@
+@prefix pod1: <http://pod1.test/>.
+@prefix pod2: <http://pod2.test/>.
+@prefix saref: <https://saref.etsi.org/core/> .
+@prefix sosa:  <http://www.w3.org/ns/sosa/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+#Using saref
+pod1:room1 a saref:FeatureOfInterest.
+pod1:obs1 a saref:Measurement .
+pod1:tempSensor a saref:TemperatureSensor .
+pod1:temperature a saref:Property.
+
+pod1:obs1 saref:isMeasurementOf pod1:room1.
+pod1:obs1 saref:relatesToProperty pod1:roomTemperature.
+pod1:obs1 saref:hasValue "20.1" .
+pod1:obs1 saref:measurementMadeBy pod1:tempSensor .
+
+#Using sosa
+pod2:room2 a sosa:FeatureOfInterest.
+pod2:obs2 a sosa:Observation .
+pod2:tempSensor a  sosa:Sensor .
+pod2:temperature a sosa:ObservableProperty.
+
+pod2:obs2 sosa:hasFeatureOfInterest pod2:room2.
+pod2:obs2 sosa:observedProperty pod2:temperature.
+pod2:obs2 sosa:hasSimpleResult "23.4" .
+pod2:obs2 sosa:madeBySensor pod2:tempSensor .

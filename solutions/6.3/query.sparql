@@ -1,0 +1,8 @@
+PREFIX saref: <https://saref.etsi.org/core/>
+
+SELECT  * WHERE {
+  ?featureOfInterest a saref:FeatureOfInterest.
+  ?measurement saref:isMeasurementOf ?featureOfInterest.
+  ?measurement saref:relatesToProperty ?property.
+  ?measurement saref:hasValue ?value.
+}

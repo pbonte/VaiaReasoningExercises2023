@@ -1,0 +1,50 @@
+## added prefixes for the ease of writing the queries.
+PREFIX : <http://pbonte.github.io/roxi/> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX sosa: <http://www.w3.org/ns/sosa/> 
+PREFIX saref: <https://saref.etsi.org/core/> 
+PREFIX sioc: <http://www.w3.org/Submission/sioc-spec/> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+
+
+# Note : Remember to run only one query at one time # 
+
+# Run the ?s ?p ?o query to see all the values returned from the stream
+select ?s ?p ?o where {
+    ?s ?p ?o
+}
+
+# Delete this query
+# Task 1: Write a query to find the location (?room) of the person (?person)
+
+select ?person ?room where {
+    ?person :isIn ?room .
+}
+
+# Remember : You have to add the rules (in src/rules.n3 file) 
+# to find the location. One rule for getting the location from SOSA 
+# RFID sensor and another to align the facebook and RFID localisation.
+
+# Delete the above query.
+# Task 2: Write a query to find out the COVID positive person (?person) and 
+# his location (?room)
+
+ 
+select ?person ?room where {
+    ?person :isIn ?room .
+    ?person :hasResult :positive .
+}
+
+
+# Delete the above query.
+# Task 3: Write a query to find the person at risk of 
+# COVID (?personAtRisk )with contact tracing.
+
+
+select ?personAtRisk where {
+    ?person :isIn ?room .
+    ?person :hasResult :positive .
+    ?personAtRisk :detectedWith ?person .
+}
+
+# Best of Luck :)
